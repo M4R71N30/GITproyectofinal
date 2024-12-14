@@ -7,11 +7,6 @@ import webbrowser
 from tkinter import PhotoImage
 
 
-
-
-
-
-
 ventana=tk.Tk()
 ventana.title("Que vas a jugar hoy?")
 ventana.geometry("800x500")
@@ -21,8 +16,6 @@ barra_menu= tk.Menu(ventana)
 ventana.config(menu=barra_menu)
 imagen=PhotoImage(file=r"C:\Users\gjm30\OneDrive\Documentos\ProyectoFinal\Imagenes.png\Sin título.png")
 fondo=Label(image=imagen).place(x=0,y=0)
-
-
 
 def acerca_de():
     messagebox.showinfo("Acerca de","Desarrollado por Martin Romero")
@@ -40,36 +33,26 @@ def mostrar_imagen():
     webbrowser.open(r"https://cdn.discordapp.com/attachments/1143918881866526851/1317374001068114021/depositphotos_607148484-stock-photo-woman-touching-fresh-grass-green.jpg?ex=675e73a5&is=675d2225&hm=522ade0d19703ceadc0a1d6859536d7da89b035d8bb705bfd4ea25445902f21f&")
 
 def mostrar_lista():
-    lista.pack()
+    Lista.pack()
 
-lista = tk.Listbox(ventana)
-lista.insert(1, "Elemento 1")
-lista.insert(2, "Elemento 2")
-lista.insert(3, "Elemento 3")
-lista.insert(4, "Elemento 4")
-lista.insert(5, "Elemento 5")
-lista.pack_forget()  
+Lista = tk.Listbox(ventana)
+Lista.insert(1, "God of war")
+Lista.insert(2, "Call of duty")
+Lista.insert(3, "Assasins creed")
+Lista.insert(4,"Transfromers foc")
+Lista.pack_forget()  
 
-# class editar_juegos():
+def agregar_elemento():
+    nuevo_elemento = simpledialog.askstring("Nuevo juego", "Ingresa un nuevo juego:")
     
+    if nuevo_elemento: 
+        Lista.append(nuevo_elemento) 
+        actualizar_lista()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    def actualizar_lista():
+        Lista.delete(0, tk.END)
+        for item in Lista: 
+           Lista.insert(tk.END, item)
 
 
 menu_ayuda=tk.Menu(barra_menu, tearoff=0)
@@ -91,12 +74,9 @@ menu_lista=tk.Menu(barra_menu, tearoff=0)
 barra_menu.add_cascade(label="Lista de juegos", menu=menu_lista)
 menu_lista.add_command(label="Juegos",command=mostrar_lista)
 
-
-
-
-
-
-
+menu_opciones=tk.Menu(barra_menu, tearoff=0)
+barra_menu.add_cascade(label="Opciones de juegos", menu=menu_opciones)
+menu_opciones.add_command(label="Agregar",command=agregar_elemento)
 
 
 from pygame import mixer
